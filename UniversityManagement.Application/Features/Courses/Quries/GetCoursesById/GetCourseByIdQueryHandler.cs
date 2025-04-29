@@ -23,7 +23,7 @@ namespace UniversityManagement.Application.Features.Courses.Quries.GetCoursesByI
         {
             try
             {
-                var student = await _uow.CourseRepository.GetByIdAsync(request.Id, cancellationToken);
+                var student = await _uow.CourseRepository.GetByIdWithInclude(request.Id, cancellationToken);
                 if (student == null)
                 {
                     return new CommonResponse<GetCourseByIdVm>

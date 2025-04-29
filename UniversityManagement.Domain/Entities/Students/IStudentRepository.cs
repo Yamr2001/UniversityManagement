@@ -6,5 +6,6 @@ namespace UniversityManagement.Domain.Entities.Students
     public interface IStudentRepository : IGenericRepository<Student>
     {
         Task<QueryResult<Student>> GetPagedStudentList(StudentQuery studentQuery, CancellationToken cancellationToken);
+        Task<Student?> GetByIdWithInclude(int Id, CancellationToken cancellationToken);
     }
 }

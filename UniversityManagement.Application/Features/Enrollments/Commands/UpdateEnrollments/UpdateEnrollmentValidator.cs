@@ -6,7 +6,8 @@ namespace UniversityManagement.Application.Features.Enrollments.Commands.UpdateE
     {
         public UpdateEnrollmentValidator()
         {
-
+            RuleFor(x => x.Grade)
+              .IsInEnum().WithMessage("Grade must be a valid value.");
 
         }
     }

@@ -3,7 +3,8 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using UniversityManagement.Shared.Domain;
-using ValidationException = UniversityManagement.Shared.Domain.ValidationException;
+using static UniversityManagement.Shared.Domain.CustomValidationException;
+using CustomValidationException = UniversityManagement.Shared.Domain.CustomValidationException;
 
 namespace UniversityManagement.Shared.Middlewares
 {
@@ -45,7 +46,7 @@ namespace UniversityManagement.Shared.Middlewares
             {
                 BadRequestException => StatusCodes.Status400BadRequest,
                 NotFoundException => StatusCodes.Status404NotFound,
-                ValidationException => (int)HttpStatusCode.BadRequest,
+                CustomValidationException => (int)HttpStatusCode.BadRequest,
                 _ => StatusCodes.Status500InternalServerError,
 
             };
@@ -55,7 +56,8 @@ namespace UniversityManagement.Shared.Middlewares
         {
             return exception switch
             {
-                ValidationException => "Validation Failure",
+                CustomValidationException => "unExcepected Error",
+                ValidationExceptionValidator => "Validation Failure",
                 _ => "Internal Server Error"
             };
         }
@@ -64,16 +66,16 @@ namespace UniversityManagement.Shared.Middlewares
         {
             var errorMessages = new List<string>();
 
-            if (exception is ValidationException validationException)
+            if (exception is CustomValidationException validationException)
             {
                 foreach (var error in validationException.Errors)
                 {
                     errorMessages.AddRange(error);
                 }
             }
-            else if (exception is ValidationException newValidationException)
+            else if (exception is ValidationExceptionValidator newValidationException)
             {
-                errorMessages.AddRange(newValidationException.Errors);
+                errorMessages.AddRange(newValidationException.ErrorMessages);
             }
 
             return errorMessages.Count > 0 ? errorMessages : [];

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using UniversityManagement.Application.Features.Courses.Quries.GetCoursesById;
 using UniversityManagement.Application.Features.Departments.Commands.CreateDepartments;
 using UniversityManagement.Application.Features.Departments.Commands.UpdateDepartments;
 using UniversityManagement.Application.Features.Departments.Quries.GetAllDepartmentsList;
@@ -20,6 +21,7 @@ namespace UniversityManagement.Application.Mapping
             CreateMap<GetDepartmentByIdQuery, Department>().ReverseMap();
             CreateMap<DepartmentQuery, GetDepartmentListQuery>().ReverseMap();
             CreateMap<GetDepartmentListVm, Department>().ReverseMap();
+            CreateMap<DepartmentResponseVm, Department>().ReverseMap();
         }
     }
 }

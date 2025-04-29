@@ -16,10 +16,22 @@ namespace UniversityManagement.Infrastructure.Repositories.Courses
             _context = context;
         }
 
+
+        public async Task<Course?> GetByIdWithInclude(int Id, CancellationToken cancellationToken)
+        {
+            return await _context.Courses
+                 .IgnoreQueryFilters()
+                  .Where(c => !c.IsDeleted)
+                .Include(x => x.Department)
+                .FirstOrDefaultAsync(x => x.Id == Id, cancellationToken);
+        }
         public async Task<QueryResult<Course>> GetPagedCourseList(CourseQuery courseQuery, CancellationToken cancellationToken)
         {
             var queryResult = new QueryResult<Course>();
-            var query = _context.Courses.Include(c => c.Department)
+            var query = _context.Courses
+                  .IgnoreQueryFilters()
+                  .Where(c => !c.IsDeleted)
+                .Include(c => c.Department)
                                         .Include(c => c.Enrollments)
                                         .AsQueryable();
 

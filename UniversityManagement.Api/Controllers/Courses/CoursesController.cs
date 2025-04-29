@@ -35,7 +35,7 @@ namespace UniversityManagement.Api.Controllers.Courses
             return BadRequest(result);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteCourse([FromBody] DeleteCourseCommand command)
+        public async Task<IActionResult> DeleteCourse([FromQuery] DeleteCourseCommand command)
         {
             CommonResponse<int> result = await mediator.Send(command);
             if (result.Success)

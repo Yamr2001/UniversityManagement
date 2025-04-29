@@ -3,6 +3,7 @@ using UniversityManagement.Application;
 using UniversityManagement.Domain.Base;
 using UniversityManagement.Infrastructure.Presistence;
 using UniversityManagement.Infrastructure.Repositories.Base;
+using UniversityManagement.Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1"));
     app.MapOpenApi();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

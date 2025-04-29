@@ -18,7 +18,7 @@ namespace UniversityManagement.Infrastructure.Repositories.Departments
         public async Task<QueryResult<Department>> GetPagedDepartmentList(DepartmentQuery departmentQuery, CancellationToken cancellationToken)
         {
             var queryResult = new QueryResult<Department>();
-            var query = _context.Departments.Include(d => d.Administrator)
+            var query = _context.Departments.IgnoreQueryFilters().Where(c => !c.IsDeleted).Include(d => d.Administrator)
                                             .Include(d => d.Courses)
                                             .AsQueryable();
 

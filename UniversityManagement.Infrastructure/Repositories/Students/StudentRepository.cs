@@ -1,10 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using UniversityManagement.Domain.Entities.Courses;
-using UniversityManagement.Domain.Entities.Departments;
-using UniversityManagement.Domain.Entities.Enrollments;
-using UniversityManagement.Domain.Entities.Instructors;
 using UniversityManagement.Domain.Entities.Students;
 using UniversityManagement.Infrastructure.Presistence;
 using UniversityManagement.Shared.Infrastructure;
@@ -20,6 +16,13 @@ namespace UniversityManagement.Infrastructure.Repositories.Students
             _context = context;
         }
 
+        public async Task<Student?> GetByIdWithInclude(int Id, CancellationToken cancellationToken)
+        {
+            return await _context.Students
+                .IgnoreQueryFilters().Where(c => !c.IsDeleted)
+                .Include(x => x.Enrollments)
+                .FirstOrDefaultAsync(x => x.Id == Id, cancellationToken);
+        }
         public async Task<QueryResult<Student>> GetPagedStudentList(StudentQuery studentQuery, CancellationToken cancellationToken)
         {
             var queryResult = new QueryResult<Student>();

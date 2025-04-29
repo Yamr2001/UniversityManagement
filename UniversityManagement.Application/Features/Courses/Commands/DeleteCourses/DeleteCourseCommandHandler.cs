@@ -20,8 +20,8 @@ namespace UniversityManagement.Application.Features.Courses.Commands.DeleteCours
         {
             try
             {
-                var CourseToDelete = await _uow.DepartmentRepository.GetByIdAsync(request.Id, cancellationToken);
-                await _uow.DepartmentRepository.DeleteAsync(CourseToDelete, cancellationToken);
+                var CourseToDelete = await _uow.CourseRepository.GetByIdAsync(request.Id, cancellationToken);
+                await _uow.CourseRepository.DeleteAsync(CourseToDelete, cancellationToken);
                 await _uow.Complete();
 
                 return new CommonResponse<int>

@@ -19,11 +19,13 @@ namespace UniversityManagement.Infrastructure.Repositories.Enrollments
         public async Task<QueryResult<Enrollment>> GetPagedEnrollmentList(EnrollmentQuery enrollmentQuery, CancellationToken cancellationToken)
         {
             var queryResult = new QueryResult<Enrollment>();
-            var query = _context.Enrollments.Include(e => e.Student)
-                                            .Include(e => e.Course)
-                                            .AsQueryable();
+            var query = _context.Enrollments
+                 .IgnoreQueryFilters()
+                  .Where(c => !c.IsDeleted)
+                .Include(e => e.Student)
+                 .Include(e => e.Course)
+                 .AsQueryable();
 
-            // Define columns for ordering
             var columnsOrder = new Dictionary<string, Expression<Func<Enrollment, object>>>
             {
                 ["id"] = x => x.Id,
@@ -33,7 +35,6 @@ namespace UniversityManagement.Infrastructure.Repositories.Enrollments
                 ["enrollmentdate"] = x => x.EnrollmentDate
             };
 
-            // Define columns for filtering
             var columnsFilter = new Dictionary<string, Expression<Func<Enrollment, bool>>>
             {
                 ["studentname"] = x => x.Student.Name.Contains(enrollmentQuery.Filter ?? string.Empty),

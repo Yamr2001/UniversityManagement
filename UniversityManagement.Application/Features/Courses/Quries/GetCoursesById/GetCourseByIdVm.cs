@@ -6,5 +6,6 @@
         public string Title { get; set; } = string.Empty;
         public int Credits { get; set; }
         public int DepartmentId { get; set; }
+        public DepartmentResponseVm Department { get; set; }
     }
 }

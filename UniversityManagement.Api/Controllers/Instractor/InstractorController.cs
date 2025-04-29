@@ -35,7 +35,7 @@ namespace UniversityManagement.Api.Controllers.Instractor
             return BadRequest(result);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteInstractor([FromBody] DeleteInstructorCommand command)
+        public async Task<IActionResult> DeleteInstractor([FromQuery] DeleteInstructorCommand command)
         {
             CommonResponse<int> result = await mediator.Send(command);
             if (result.Success)

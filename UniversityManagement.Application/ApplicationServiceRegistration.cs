@@ -21,7 +21,7 @@ namespace UniversityManagement.Application
             services.AddHttpClient();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddTransient<ExceptionHandlingMiddleware>();
 
 

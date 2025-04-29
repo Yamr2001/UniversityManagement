@@ -19,7 +19,9 @@ namespace UniversityManagement.Application.Mapping
             CreateMap<UpdateCourseCommand, Course>()
           .ForMember(dest => dest.Enrollments, opt => opt.Ignore());
 
-            CreateMap<GetCourseByIdVm, Course>().ReverseMap();
+            CreateMap<GetCourseByIdVm, Course>()
+                     .ForMember(dest => dest.Department, opt => opt.MapFrom(x => x.Department))
+                .ReverseMap();
             CreateMap<CourseQuery, GetCourseListQuery>().ReverseMap();
             CreateMap<GetCourseListVm, Course>().ReverseMap();
         }

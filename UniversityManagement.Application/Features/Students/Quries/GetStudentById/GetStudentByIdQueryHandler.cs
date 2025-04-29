@@ -23,7 +23,7 @@ namespace UniversityManagement.Application.Features.Students.Quries.GetStudentBy
         {
             try
             {
-                var student = await _uow.StudentRepository.GetByIdAsync(request.Id, cancellationToken);
+                var student = await _uow.StudentRepository.GetByIdWithInclude(request.Id, cancellationToken);
                 if (student == null)
                 {
                     return new CommonResponse<GetStudentsByIdVm>

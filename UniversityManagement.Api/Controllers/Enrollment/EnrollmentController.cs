@@ -35,7 +35,7 @@ namespace UniversityManagement.Api.Controllers.Enrollment
             return BadRequest(result);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteEnrollment([FromBody] DeleteEnrollmentCommand command)
+        public async Task<IActionResult> DeleteEnrollment([FromQuery] DeleteEnrollmentCommand command)
         {
             CommonResponse<int> result = await mediator.Send(command);
             if (result.Success)

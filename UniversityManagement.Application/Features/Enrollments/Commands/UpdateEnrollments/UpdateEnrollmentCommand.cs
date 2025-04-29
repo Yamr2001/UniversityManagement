@@ -7,9 +7,6 @@ namespace UniversityManagement.Application.Features.Enrollments.Commands.UpdateE
     public class UpdateEnrollmentCommand : ICommand<CommonResponse<int>>
     {
         public int Id { get; set; }
-        public int StudentId { get; set; }
-        public int CourseId { get; set; }
         public Grade Grade { get; set; }
-        public DateTime EnrollmentDate { get; set; }
     }
 }
