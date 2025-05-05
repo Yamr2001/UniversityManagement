@@ -8,7 +8,7 @@ using UniversityManagement.Shared.Resourses;
 
 namespace UniversityManagement.Infrastructure.Repositories.Enrollments
 {
-    public class EnrollmentRepository : GenericRepositoryBase<Enrollment>, IEnrollmentRepository
+    public class EnrollmentRepository : GenericRepositoryBase<Enrollment, int>, IEnrollmentRepository
     {
         private readonly ApplicationDbContext _context;
         public EnrollmentRepository(ApplicationDbContext context, IHttpContextAccessor accessor) : base(context, accessor)

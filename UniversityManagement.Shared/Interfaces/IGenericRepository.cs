@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using UniversityManagement.Shared.Comman;
 
 namespace UniversityManagement.Shared.Interfaces
 {
-    public interface IGenericRepository<T> where T : BaseEntity<int>
+    public interface IGenericRepository<T, Tkey>
     {
         Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken);
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);

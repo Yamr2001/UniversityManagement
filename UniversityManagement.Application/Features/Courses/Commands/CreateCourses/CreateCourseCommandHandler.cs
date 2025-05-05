@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using UniversityManagement.Application.HangFireJobs;
 using UniversityManagement.Domain.Base;
 using UniversityManagement.Domain.Entities.Courses;
 using UniversityManagement.Shared.Application.Abstractions.Messeging;
@@ -11,13 +12,15 @@ namespace UniversityManagement.Application.Features.Courses.Commands.CreateCours
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly IJobService _jobService;
         private readonly ILogger<CreateCourseCommandHandler> _logger;
 
-        public CreateCourseCommandHandler(IUnitOfWork uow, IMapper mapper, ILogger<CreateCourseCommandHandler> logger)
+        public CreateCourseCommandHandler(IUnitOfWork uow, IMapper mapper, ILogger<CreateCourseCommandHandler> logger, IJobService jobService)
         {
             _uow = uow;
             _mapper = mapper;
             _logger = logger;
+            _jobService = jobService;
         }
 
         public async Task<CommonResponse<int>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
@@ -27,6 +30,7 @@ namespace UniversityManagement.Application.Features.Courses.Commands.CreateCours
                 var CourseToCreate = _mapper.Map<Course>(request);
                 await _uow.CourseRepository.AddAsync(CourseToCreate, cancellationToken);
                 await _uow.Complete();
+                _jobService.EnqueueEmailJob("The Course has been created successfully", "Youssef");
 
                 return new CommonResponse<int>
                 {

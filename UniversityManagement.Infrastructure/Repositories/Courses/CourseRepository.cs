@@ -8,7 +8,7 @@ using UniversityManagement.Shared.Resourses;
 
 namespace UniversityManagement.Infrastructure.Repositories.Courses
 {
-    public class CourseRepository : GenericRepositoryBase<Course>, ICourseRepository
+    public class CourseRepository : GenericRepositoryBase<Course, int>, ICourseRepository
     {
         private readonly ApplicationDbContext _context;
         public CourseRepository(ApplicationDbContext context, IHttpContextAccessor accessor) : base(context, accessor)

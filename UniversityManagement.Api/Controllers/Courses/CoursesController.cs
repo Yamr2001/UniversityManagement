@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniversityManagement.Application.Features.Courses.Commands.CreateCourses;
 using UniversityManagement.Application.Features.Courses.Commands.DeleteCourses;
@@ -12,6 +13,7 @@ namespace UniversityManagement.Api.Controllers.Courses
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CoursesController(IMediator mediator) : ControllerBase
     {
         [HttpPost]

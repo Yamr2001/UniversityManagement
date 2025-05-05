@@ -6,7 +6,8 @@ using UniversityManagement.Shared.Interfaces;
 
 namespace UniversityManagement.Shared.Infrastructure
 {
-    public class GenericRepositoryBase<T> : IGenericRepository<T> where T : BaseEntity<int>
+    public class GenericRepositoryBase<T, Tkey> : IGenericRepository<T, Tkey> where T : BaseEntity<Tkey>
+        where Tkey : struct
     {
         private readonly IHttpContextAccessor _accessor;
         private readonly DbSet<T> _entities;

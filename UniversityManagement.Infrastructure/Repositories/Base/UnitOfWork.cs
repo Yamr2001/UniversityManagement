@@ -5,12 +5,14 @@ using UniversityManagement.Domain.Entities.Departments;
 using UniversityManagement.Domain.Entities.Enrollments;
 using UniversityManagement.Domain.Entities.Instructors;
 using UniversityManagement.Domain.Entities.Students;
+using UniversityManagement.Domain.Entities.Users;
 using UniversityManagement.Infrastructure.Presistence;
 using UniversityManagement.Infrastructure.Repositories.Courses;
 using UniversityManagement.Infrastructure.Repositories.Departments;
 using UniversityManagement.Infrastructure.Repositories.Enrollments;
 using UniversityManagement.Infrastructure.Repositories.Instructors;
 using UniversityManagement.Infrastructure.Repositories.Students;
+using UniversityManagement.Infrastructure.Repositories.Users;
 
 namespace UniversityManagement.Infrastructure.Repositories.Base
 {
@@ -45,7 +47,9 @@ namespace UniversityManagement.Infrastructure.Repositories.Base
         private IInstructorRepository _instructorRepository;
         public IInstructorRepository InstructorRepository =>
             _instructorRepository ??= new InstructorRepository(_context, _contextAccessor);
-
+        private IUserRepository _userRepository;
+        public IUserRepository UserRepository =>
+            _userRepository ??= new UserRepository(_context, _contextAccessor);
 
         public async Task Complete()
         {

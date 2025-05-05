@@ -8,7 +8,7 @@ using UniversityManagement.Shared.Resourses;
 
 namespace UniversityManagement.Infrastructure.Repositories.Students
 {
-    public class StudentRepository : GenericRepositoryBase<Student>, IStudentRepository
+    public class StudentRepository : GenericRepositoryBase<Student, int>, IStudentRepository
     {
         private readonly ApplicationDbContext _context;
         public StudentRepository(ApplicationDbContext context, IHttpContextAccessor accessor) : base(context, accessor)

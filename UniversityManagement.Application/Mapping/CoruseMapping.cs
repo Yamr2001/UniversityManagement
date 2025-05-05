@@ -3,6 +3,8 @@ using UniversityManagement.Application.Features.Courses.Commands.CreateCourses;
 using UniversityManagement.Application.Features.Courses.Commands.UpdateCourses;
 using UniversityManagement.Application.Features.Courses.Quries.GetAllCoursesList;
 using UniversityManagement.Application.Features.Courses.Quries.GetCoursesById;
+using UniversityManagement.Application.Features.Registration.Commands.CreateRegistrations;
+using UniversityManagement.Application.Features.Registration.Quries.GetAllUsersList;
 using UniversityManagement.Domain.Entities.Courses;
 using UniversityManagement.Shared.Resourses;
 
